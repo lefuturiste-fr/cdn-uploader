@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/css/bootflat.min.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		
+		<title>Home page</title>
+	</head>
+	<body>
+		<div class="container">
+    		<div class="row">
+    			<div class="col-md-12">
+					<div class="right-nav">		
+						<span>Connecté en tant que <strong>le_futuriste</strong></span>
+						<button class="btn btn-sm btn-warning"><i class="fa fa-cog fa-lg fa-margin" aria-hidden="true"></i> Paramètres</button>
+						<button class="btn btn-sm btn-danger"><i class="fa fa-sign-out fa-lg fa-margin" aria-hidden="true"></i> Déconnexion</button>
+					</div>				
+					<h1>Ajouter une resource</h1>
+					<hr>
+				</div>				
+			</div>
+			<p><a href="home.html" class="btn btn-default"><i class="fa fa-reply fa-margin" aria-hidden="true"></i> Retour</a></p>
+
+			<form action="" method="post" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-success"> Item ajouté ! <a href="home.html">Retour à l'acceuil</a></div>
+					</div>
+				</div>
+				<div class=" row">
+					<div class="col-md-12 form-group">
+						<input type="text" name="path"  class="form-control" placeholder="Emplacement de la ressource" required>
+					</div>
+					<div class="col-md-12 form-group">
+						<div class="input-group">
+			                <label class="input-group-btn">
+			                    <span class="btn btn-primary">
+			                        Parcourir... <input type="file" style="display: none;" multiple>
+			                    </span>
+			                </label>
+                			<input type="text" class="form-control" readonly>
+            			</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<button type="submit" name="btn" class="btn btn-primary">Ajouter</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			/*
+			Important:
+			https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3
+			*/
+			$(function() {
+			  // We can attach the `fileselect` event to all file inputs on the page
+			  $(document).on('change', ':file', function() {
+			    var input = $(this),
+			        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+			        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+			    input.trigger('fileselect', [numFiles, label]);
+			  });
+
+			  // We can watch for our custom `fileselect` event like this
+			  $(document).ready( function() {
+			      $(':file').on('fileselect', function(event, numFiles, label) {
+
+			          var input = $(this).parents('.input-group').find(':text'),
+			              log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+			          if( input.length ) {
+			              input.val(log);
+			          } else {
+			              if( log ) alert(log);
+			          }
+
+			      });
+			  });
+			  
+			});
+		</script>
+	</body>
+</html>
